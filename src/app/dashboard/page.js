@@ -1,9 +1,9 @@
 import Link from "next/link";
 
-import { deletePost } from "@/actions/posts";
 import { Posts } from "@/lib/database";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
+import DeletePostButton from "@/components/DeletePostButton";
 
 function formatDate(value) {
   if (!value) return "—";
@@ -131,17 +131,10 @@ export default async function Dashboard() {
                         >
                           Edit
                         </Button>
-                        <form action={deletePost}>
-                          <input
-                            type="hidden"
-                            name="postId"
-                            value={post._id}
-                            readOnly
-                          />
-                          <Button type="submit" size="sm" variant="danger">
-                            Delete
-                          </Button>
-                        </form>
+                        <DeletePostButton
+                          postId={post._id}
+                          postTitle={post.title}
+                        />
                       </div>
                     </td>
                   </tr>
