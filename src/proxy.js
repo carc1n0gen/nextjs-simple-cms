@@ -1,15 +1,25 @@
 import { NextResponse } from "next/server";
 
-import { extendSession, startSession } from "@/lib/session";
+import {
+  SESSION_COOKIE_NAME,
+  getSessionTokenRefresh,
+  sessionCookieOptions,
+} from "@/lib/sessionCore";
 
 export async function proxy(request) {
-  if (!request.cookies.has("session")) {
-    await startSession();
-  } else {
-    await extendSession();
+  const response = NextResponse.next();
+  const currentToken = request.cookies.get(SESSION_COOKIE_NAME)?.value;
+  const refreshedSession = await getSessionTokenRefresh(currentToken);
+
+  if (refreshedSession) {
+    response.cookies.set(
+      SESSION_COOKIE_NAME,
+      refreshedSession.token,
+      sessionCookieOptions(refreshedSession.expiresAt),
+    );
   }
 
-  return NextResponse.next();
+  return response;
 }
 
 export const config = {
