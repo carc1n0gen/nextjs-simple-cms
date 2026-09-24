@@ -10,9 +10,13 @@ This project is a simple CMS built with Next.js. It uses a HMAC-signed (not encr
 
 ## Getting Started
 
+Create a .env.local file in the root
+
 First, run the development server:
 
 ```bash
+npm install
+
 npm run dev
 # or
 yarn dev

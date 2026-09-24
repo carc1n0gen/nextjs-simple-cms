@@ -5,6 +5,11 @@ import { SignJWT, jwtVerify } from "jose";
 export const SESSION_COOKIE_NAME = "session";
 
 const SECRET_KEY = process.env.SECRET_KEY;
+
+if (!SECRET_KEY) {
+  throw new Error("Missing SECRET_KEY environment variable");
+}
+
 const ENCODED_KEY = new TextEncoder().encode(SECRET_KEY);
 const SESSION_LIFETIME_DAYS = Number(process.env.SESSION_LIFETIME_DAYS ?? 7);
 const SESSION_REFRESH_THRESHOLD_DAYS = Number(
