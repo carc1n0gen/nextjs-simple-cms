@@ -1,4 +1,12 @@
+# Simple CMS
+
+![app screenshot](.github/screenshot.webp)
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+## About
+
+This project is a simple CMS built with Next.js. It uses a HMAC-signed (not encrypted) cookie to store session data and verify it has not been tampered with. The current logged in user id is stored in the cookie, and signature verification ensures the cookie has not been tampered with.
 
 ## Getting Started
 
