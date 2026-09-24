@@ -1,17 +1,11 @@
 "use client";
 
-import { Button } from "react-bootstrap";
-
 import { signout } from "@/actions/auth";
+import Button from "@/components/ui/Button";
 
 export default function SignoutButton() {
   return (
-    <Button
-      variant="warning"
-      size="sm"
-      className="ms-3 px-3"
-      onClick={async () => await signout()}
-    >
+    <Button variant="secondary" size="sm" onClick={async () => await signout()}>
       Sign out
     </Button>
   );

@@ -8,45 +8,39 @@ import { PostFormSchema } from "@/lib/formSchemas";
 import { getAuthenticatedUser, isAuthenticated } from "@/lib/authorization";
 
 export async function savePost(currentState, formData) {
-  const user = await getAuthenticatedUser()
+  const user = await getAuthenticatedUser();
 
-  const validatedFields = PostFormSchema.safeParse(Object.fromEntries(formData));
+  const validatedFields = PostFormSchema.safeParse(
+    Object.fromEntries(formData),
+  );
   if (!validatedFields.success) {
     return {
       previousValues: Object.fromEntries(formData),
-      errors: flattenError(validatedFields.error).fieldErrors
+      errors: flattenError(validatedFields.error).fieldErrors,
     };
   }
 
-  let post;
   const fields = {
     slug: validatedFields.data.slug,
     title: validatedFields.data.title,
-    tags: validatedFields.data.tags.trim().split(" "),
+    tags: (validatedFields.data.tags ?? "").trim().split(/\s+/).filter(Boolean),
     excerpt: validatedFields.data.excerpt,
     content: validatedFields.data.content,
-  }
+  };
   if (validatedFields.data.postId) {
-    post = Posts.update(validatedFields.data.postId, {
-      ...fields,
-      updatedAt: new Date(),
-    });
+    Posts.update(validatedFields.data.postId, fields);
   } else {
-    post = Posts.insert({
-      ...fields, userId: user._id,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    });
+    Posts.insert({ ...fields, userId: user._id });
   }
 
   return redirect("/dashboard");
 }
 
 export async function deletePost(formData) {
-  if (!isAuthenticated()) {
+  if (!(await isAuthenticated())) {
     return redirect("/signin");
   }
 
-  Posts.delete(formData.get("postId"));
+  Posts.remove(formData.get("postId"));
   return redirect("/dashboard");
 }

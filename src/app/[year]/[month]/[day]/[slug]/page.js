@@ -1,12 +1,13 @@
 import { notFound } from "next/navigation";
+import Link from "next/link";
 
 import { Posts } from "@/lib/database";
+import Badge from "@/components/ui/Badge";
 import BlogLayout from "@/components/BlogLayout";
-import { Badge } from "react-bootstrap";
 
 export default async function ShowPost({ params }) {
   const { slug } = await params;
-  const post = Posts.query().equalTo("slug", slug).first();
+  const post = Posts.find((candidate) => candidate.slug === slug);
 
   if (!post) {
     notFound();
@@ -14,21 +15,32 @@ export default async function ShowPost({ params }) {
 
   return (
     <BlogLayout>
-      <article>
-        <header>
-          <h2 className="mb-0">{post.title}</h2>
-          <small>
-            <div>{post.tags.map((tag) => <Badge key={tag} className="me-2">{tag}</Badge> )}</div>
-            <b>created</b>:{" "}
-            {new Date(post.createdAt).toLocaleDateString()}
-            {" "}|{" "}
-            <b>updated</b>:{" "}
+      <article className="mx-auto max-w-3xl">
+        <Link
+          href="/"
+          className="text-sm font-medium text-gray-600 no-underline hover:text-gray-950 dark:text-gray-400 dark:hover:text-gray-50"
+        >
+          ← Back to all posts
+        </Link>
+
+        <header className="mt-8 border-b border-gray-200 pb-8 dark:border-gray-800">
+          <div className="flex flex-wrap gap-2">
+            {post.tags.map((tag) => (
+              <Badge key={tag}>{tag}</Badge>
+            ))}
+          </div>
+          <h1 className="mt-6 text-4xl font-semibold tracking-tight text-balance text-gray-950 dark:text-gray-50 sm:text-5xl">
+            {post.title}
+          </h1>
+          <p className="mt-5 text-sm text-gray-500 dark:text-gray-400">
+            Published {new Date(post.createdAt).toLocaleDateString()} · Updated{" "}
             {new Date(post.updatedAt).toLocaleDateString()}
-          </small>
+          </p>
         </header>
+
         <section
-          className="mt-3"
-          dangerouslySetInnerHTML={{__html: post.content}}
+          className="rich-content mt-10 text-gray-700 dark:text-gray-300"
+          dangerouslySetInnerHTML={{ __html: post.content }}
         />
       </article>
     </BlogLayout>

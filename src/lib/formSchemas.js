@@ -4,11 +4,15 @@ import { z } from "zod/v4";
 import { Users } from "./database";
 
 export const SignupFormSchema = z.object({
-  displayName: z.string().min(3, "Display name must be at least 3 characters long."),
-  username: z.string().min(3, "Username must be at least 3 characters long.").refine((value) => {
-    const user = Users.query().equalTo("username", value).first();
-    return !user;
-  }, 'Username is already in use.'),
+  displayName: z
+    .string()
+    .min(3, "Display name must be at least 3 characters long."),
+  username: z
+    .string()
+    .min(3, "Username must be at least 3 characters long.")
+    .refine((value) => {
+      return !Users.find((user) => user.username === value);
+    }, "Username is already in use."),
   password: z.string().min(8, "Password must be at least 8 characters long."),
 });
 

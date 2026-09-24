@@ -2,16 +2,14 @@ import { NextResponse } from "next/server";
 
 import { extendSession, startSession } from "@/lib/session";
 
-export async function middleware(request) {
-  const response = NextResponse.next();
-
+export async function proxy(request) {
   if (!request.cookies.has("session")) {
     await startSession();
   } else {
     await extendSession();
   }
 
-  return response;
+  return NextResponse.next();
 }
 
 export const config = {
@@ -24,5 +22,5 @@ export const config = {
      * - favicon.ico, sitemap.xml, robots.txt (metadata files)
      */
     "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
-  ]
+  ],
 };

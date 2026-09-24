@@ -1,5 +1,278 @@
-@import "bootstrap";
+@import "tailwindcss";
+
+:root {
+    color-scheme: light dark;
+}
+
+html {
+    scroll-behavior: smooth;
+}
 
 body {
-    background-color: #f7fafc
+    min-height: 100vh;
+}
+
+button,
+input,
+textarea {
+    font: inherit;
+}
+
+.rich-content,
+.jodit-deep-dark .jodit-wysiwyg {
+    line-height: 1.75;
+}
+
+.rich-content h1,
+.jodit-deep-dark .jodit-wysiwyg h1 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+}
+
+.rich-content h2,
+.jodit-deep-dark .jodit-wysiwyg h2 {
+    margin-top: 1.75rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 650;
+    letter-spacing: -0.025em;
+}
+
+.rich-content h3,
+.jodit-deep-dark .jodit-wysiwyg h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 650;
+}
+
+.rich-content h4,
+.jodit-deep-dark .jodit-wysiwyg h4 {
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    font-weight: 650;
+}
+
+.rich-content p,
+.jodit-deep-dark .jodit-wysiwyg p {
+    margin-bottom: 1rem;
+}
+
+.rich-content ul,
+.rich-content ol,
+.jodit-deep-dark .jodit-wysiwyg ul,
+.jodit-deep-dark .jodit-wysiwyg ol {
+    margin-block: 1rem;
+    padding-left: 1.5rem;
+}
+
+.rich-content ul,
+.jodit-deep-dark .jodit-wysiwyg ul {
+    list-style: disc;
+}
+
+.rich-content ol,
+.jodit-deep-dark .jodit-wysiwyg ol {
+    list-style: decimal;
+}
+
+.rich-content li,
+.jodit-deep-dark .jodit-wysiwyg li {
+    margin-block: 0.25rem;
+}
+
+.rich-content blockquote,
+.jodit-deep-dark .jodit-wysiwyg blockquote {
+    margin-block: 1.25rem;
+    border-left: 4px solid var(--color-gray-300);
+    padding-left: 1rem;
+    color: var(--color-gray-600);
+    font-style: italic;
+}
+
+.rich-content a,
+.jodit-deep-dark .jodit-wysiwyg a {
+    text-decoration-line: underline;
+    text-underline-offset: 4px;
+}
+
+.rich-content strong,
+.jodit-deep-dark .jodit-wysiwyg strong,
+.rich-content b,
+.jodit-deep-dark .jodit-wysiwyg b {
+    font-weight: 700;
+}
+
+.rich-content em,
+.jodit-deep-dark .jodit-wysiwyg em,
+.rich-content i,
+.jodit-deep-dark .jodit-wysiwyg i {
+    font-style: italic;
+}
+
+.rich-content u,
+.jodit-deep-dark .jodit-wysiwyg u {
+    text-decoration-line: underline;
+}
+
+.rich-content s,
+.rich-content strike,
+.jodit-deep-dark .jodit-wysiwyg s,
+.jodit-deep-dark .jodit-wysiwyg strike {
+    text-decoration-line: line-through;
+}
+
+.rich-content code,
+.jodit-deep-dark .jodit-wysiwyg code {
+    border-radius: 0.375rem;
+    background-color: var(--color-gray-100);
+    padding: 0.125rem 0.375rem;
+    font-size: 0.875em;
+}
+
+.rich-content pre,
+.jodit-deep-dark .jodit-wysiwyg pre {
+    margin-block: 1.25rem;
+    overflow-x: auto;
+    border-radius: 0.75rem;
+    background-color: var(--color-gray-950);
+    padding: 1rem;
+    color: var(--color-gray-100);
+}
+
+.rich-content hr,
+.jodit-deep-dark .jodit-wysiwyg hr {
+    margin-block: 2rem;
+    border: 0;
+    border-top: 1px solid var(--color-gray-200);
+}
+
+@media (prefers-color-scheme: dark) {
+    .rich-content blockquote,
+    .jodit-deep-dark .jodit-wysiwyg blockquote {
+        border-left-color: var(--color-gray-700);
+        color: var(--color-gray-300);
+    }
+
+    .rich-content code,
+    .jodit-deep-dark .jodit-wysiwyg code {
+        background-color: var(--color-gray-900);
+    }
+
+    .rich-content hr,
+    .jodit-deep-dark .jodit-wysiwyg hr {
+        border-top-color: var(--color-gray-800);
+    }
+}
+
+.jodit-deep-dark .jodit_theme_dark {
+    --jd-dark-background-color: var(--color-black);
+    --jd-dark-background-ligher: var(--color-gray-800);
+    --jd-dark-background-darknes: var(--color-black);
+    --jd-dark-border-color: var(--color-gray-800);
+    --jd-dark-text-color: var(--color-gray-300);
+    --jd-dark-text-color-opacity80: color-mix(
+        in oklab,
+        var(--color-gray-300) 80%,
+        transparent
+    );
+    --jd-dark-text-color-opacity50: color-mix(
+        in oklab,
+        var(--color-gray-300) 50%,
+        transparent
+    );
+    --jd-dark-icon-color: var(--color-gray-400);
+    --jd-dark-toolbar-color: var(--color-gray-950);
+    --jd-dark-toolbar-seperator-color1: var(--color-gray-900);
+    --jd-dark-toolbar-seperator-color2: var(--color-gray-800);
+    --jd-dark-toolbar-seperator-color-opacity80: color-mix(
+        in oklab,
+        var(--color-gray-800) 80%,
+        transparent
+    );
+    --jd-dark-toolbar-seperator-color3: var(--color-gray-900);
+    --jd-dark-color-border-selected: var(--color-gray-700);
+    --jd-color-border: var(--color-gray-800);
+    --jd-color-panel: var(--color-black);
+    --jd-color-text: var(--color-gray-300);
+    --jd-color-text-icons: var(--color-gray-400);
+    --jd-color-button-background-hover: var(--color-gray-900);
+    --jd-color-button-background-hover-opacity40: color-mix(
+        in oklab,
+        var(--color-gray-900) 40%,
+        transparent
+    );
+    --jd-color-button-background-hover-opacity60: color-mix(
+        in oklab,
+        var(--color-gray-900) 60%,
+        transparent
+    );
+}
+
+.jodit-deep-dark .jodit-container {
+    overflow: hidden;
+    border: 0 !important;
+    border-radius: inherit;
+    background-color: var(--color-white);
+}
+
+.jodit-deep-dark .jodit_theme_dark.jodit-container {
+    background-color: var(--color-black);
+}
+
+.jodit-deep-dark .jodit-toolbar__box:not(:empty) {
+    border-radius: 0 !important;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+}
+
+.jodit-deep-dark .jodit-workplace,
+.jodit-deep-dark .jodit-wysiwyg,
+.jodit-deep-dark .jodit-status-bar {
+    border-radius: 0 !important;
+}
+
+.jodit-deep-dark .jodit-status-bar {
+    border-right: 0;
+    border-bottom: 0;
+    border-left: 0;
+}
+
+.jodit-deep-dark .jodit_theme_dark .jodit-toolbar__box:not(:empty),
+.jodit-deep-dark .jodit_theme_dark .jodit-status-bar {
+    background-color: var(--color-gray-950);
+}
+
+.jodit-deep-dark .jodit_theme_dark .jodit-wysiwyg,
+.jodit-deep-dark .jodit_theme_dark .jodit-workplace,
+.jodit-deep-dark .jodit_theme_dark .jodit-wysiwyg_iframe {
+    background-color: var(--color-black);
+    color: var(--color-gray-300);
+}
+
+.jodit-deep-dark .jodit_theme_dark .jodit-toolbar-button:hover:not([disabled]),
+.jodit-deep-dark
+    .jodit_theme_dark
+    .jodit-toolbar-button__button:hover:not([disabled]),
+.jodit-deep-dark
+    .jodit_theme_dark
+    .jodit-toolbar-button__trigger:hover:not([disabled]),
+.jodit-deep-dark .jodit_theme_dark .jodit-toolbar-select:hover:not([disabled]),
+.jodit-deep-dark
+    .jodit_theme_dark
+    .jodit-toolbar-select__button:hover:not([disabled]),
+.jodit-deep-dark
+    .jodit_theme_dark
+    .jodit-toolbar-select__trigger:hover:not([disabled]) {
+    background-color: var(--color-gray-800);
+    color: var(--color-gray-100);
 }
