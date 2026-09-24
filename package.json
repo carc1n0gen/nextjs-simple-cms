@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "generate-secret": "node scripts/generate-secret.mjs"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
