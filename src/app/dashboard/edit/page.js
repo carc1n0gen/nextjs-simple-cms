@@ -12,7 +12,7 @@ export default async function EditPost({ searchParams }) {
   }
 
   const { postId = "" } = await searchParams;
-  const post = Posts.findById(postId);
+  const post = Posts.query().equalTo("_id", postId).first();
 
   return (
     <div className="space-y-8">

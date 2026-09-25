@@ -11,7 +11,7 @@ export const SignupFormSchema = z.object({
     .string()
     .min(3, "Username must be at least 3 characters long.")
     .refine((value) => {
-      return !Users.find((user) => user.username === value);
+      return !Users.query().equalTo("username", value).first();
     }, "Username is already in use."),
   password: z.string().min(8, "Password must be at least 8 characters long."),
 });

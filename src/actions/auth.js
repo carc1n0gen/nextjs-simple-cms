@@ -47,9 +47,9 @@ export async function signin(currentState, formData) {
     };
   }
 
-  const user = Users.find(
-    (candidate) => candidate.username === validatedFields.data.username,
-  );
+  const user = Users.query()
+    .equalTo("username", validatedFields.data.username)
+    .first();
 
   if (
     !user ||

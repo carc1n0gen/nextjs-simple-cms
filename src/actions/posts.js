@@ -20,27 +20,36 @@ export async function savePost(currentState, formData) {
     };
   }
 
+  let post;
   const fields = {
     slug: validatedFields.data.slug,
     title: validatedFields.data.title,
-    tags: (validatedFields.data.tags ?? "").trim().split(/\s+/).filter(Boolean),
+    tags: validatedFields.data.tags.trim().split(" "),
     excerpt: validatedFields.data.excerpt,
     content: validatedFields.data.content,
   };
   if (validatedFields.data.postId) {
-    Posts.update(validatedFields.data.postId, fields);
+    post = Posts.update(validatedFields.data.postId, {
+      ...fields,
+      updatedAt: new Date(),
+    });
   } else {
-    Posts.insert({ ...fields, userId: user._id });
+    post = Posts.insert({
+      ...fields,
+      userId: user._id,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
   }
 
   return redirect("/dashboard");
 }
 
 export async function deletePost(formData) {
-  if (!(await isAuthenticated())) {
+  if (!isAuthenticated()) {
     return redirect("/signin");
   }
 
-  Posts.remove(formData.get("postId"));
+  Posts.delete(formData.get("postId"));
   return redirect("/dashboard");
 }

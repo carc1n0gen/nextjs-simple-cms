@@ -11,8 +11,8 @@ function formatDate(value) {
 }
 
 export default async function Dashboard() {
-  const posts = Posts.sortedBy("createdAt");
-  const latestPost = Posts.sortedBy("updatedAt")[0];
+  const posts = Posts.query().descending("createdAt").find();
+  const latestPost = Posts.query().descending("updatedAt").first();
   const tagCount = new Set(posts.flatMap((post) => post.tags ?? [])).size;
 
   return (

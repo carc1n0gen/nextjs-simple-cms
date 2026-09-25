@@ -5,7 +5,7 @@ import Badge from "@/components/ui/Badge";
 import BlogLayout from "@/components/BlogLayout";
 
 export default function Blog() {
-  const posts = Posts.sortedBy("createdAt");
+  const posts = Posts.query().descending("createdAt").find();
 
   return (
     <BlogLayout>

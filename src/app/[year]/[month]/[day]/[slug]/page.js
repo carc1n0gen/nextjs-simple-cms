@@ -7,7 +7,7 @@ import BlogLayout from "@/components/BlogLayout";
 
 export default async function ShowPost({ params }) {
   const { slug } = await params;
-  const post = Posts.find((candidate) => candidate.slug === slug);
+  const post = Posts.query().equalTo("slug", slug).first();
 
   if (!post) {
     notFound();
