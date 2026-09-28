@@ -29,7 +29,7 @@ export async function signup(currentState, formData) {
   Users.insert({
     displayName: validatedFields.data.displayName,
     username: validatedFields.data.username,
-    password: bcrypt.hashSync(validatedFields.data.password, 10),
+    password: bcrypt.hashSync(validatedFields.data.password, 12),
   });
 
   return redirect("/signin");
